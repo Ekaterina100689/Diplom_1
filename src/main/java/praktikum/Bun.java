@@ -6,6 +6,8 @@ package praktikum;
  */
 public class Bun {
 
+    private static final float EPS = (float)0.00000001;
+
     public String name;
     public float price;
 
@@ -22,4 +24,19 @@ public class Bun {
         return price;
     }
 
+    @Override
+    public boolean equals(Object obj) {
+        if (!(obj instanceof Bun)) {
+            return false;
+        }
+        Bun bun = (Bun)obj;
+        if (name == null) {
+            if (bun.getName() != null) {
+                return false;
+            } else {
+                return Math.abs(price - bun.getPrice()) < EPS;
+            }
+        }
+        return name.equals(bun.getName()) && Math.abs(price - bun.getPrice()) < EPS;
+    }
 }
